@@ -13,7 +13,7 @@ from langchain_openai import OpenAIEmbeddings
 
 # Set environment variables
 os.environ['OPENAI_API_KEY'] =st.secrets['OPENAI_API_KEY']
-os.environ["api_key"] = st.secrets['api_key '] 
+os.environ["api_key"] = st.secrets['api_key'] 
 os.environ["PINECONE_API_KEY"] = st.secrets['PINECONE_API_KEY'] 
 
 llm = ChatOpenAI()
