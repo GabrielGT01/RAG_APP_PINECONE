@@ -19,6 +19,8 @@ os.environ["PINECONE_API_KEY"] = st.secrets['PINECONE_API_KEY']
 PINECONE_API = st.secrets['PINECONE_API_KEY'] 
 llm = ChatOpenAI()
 
+st.write(PINECONE_API)
+
 # Function to load documents
 def load_documents(file):
     name, extension = os.path.splitext(file)
