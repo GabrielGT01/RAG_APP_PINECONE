@@ -9,3 +9,4 @@ text-unidecode
 langchain-community==0.0.24
 langchainhub==0.1.15
 openai==1.12.0
+langchain-pinecone==0.0.3
