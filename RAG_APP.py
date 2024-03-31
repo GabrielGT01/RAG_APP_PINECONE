@@ -65,7 +65,7 @@ def create_embeddings_vectorstore(chunked_data):
 
 # Function to delete Pinecone index
 def delete_pinecone_index(index_name='project'):
-    #os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
+    os.environ["PINECONE_API_KEY"] = st.secrets['PINECONE_API_KEY']
     import pinecone
     pc = pinecone.Pinecone()
     
