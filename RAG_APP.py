@@ -17,7 +17,7 @@ api_key = st.secrets['api_key']
 PINECONE_API_KEY = st.secrets['PINECONE_API_KEY']
 
 llm = ChatOpenAI()
-
+st.write(PINECONE_API_KEY)
 # Function to load documents
 def load_documents(file):
     name, extension = os.path.splitext(file)
