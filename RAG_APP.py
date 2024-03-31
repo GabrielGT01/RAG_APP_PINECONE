@@ -75,15 +75,13 @@ def delete_pinecone_index(index_name='project'):
     os.environ["PINECONE_API_KEY"] = str(PINECONE_API_KEY)
     import pinecone
     pc = pinecone.Pinecone()
-    
     if index_name == 'all':
         indexes = pc.list_indexes().names()
-        
         for index in indexes:
             pc.delete_index(index)
-        
     else:
         pc.delete_index(index_name)
+        
 
 # Function to ask and get answers
 def questions_answer(question, vector_store):
