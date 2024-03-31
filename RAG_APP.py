@@ -17,7 +17,7 @@ api_key = st.secrets['api_key']
 PINECONE_API_KEY = st.secrets['PINECONE_API_KEY']
 
 llm = ChatOpenAI()
-str(st.write(PINECONE_API_KEY))
+
 # Function to load documents
 def load_documents(file):
     name, extension = os.path.splitext(file)
@@ -67,7 +67,7 @@ def create_embeddings_vectorstore(chunked_data):
 
 # Function to delete Pinecone index
 def delete_pinecone_index(index_name='project'):
-    os.environ["PINECONE_API_KEY"] = st.secrets['PINECONE_API_KEY']
+    os.environ["PINECONE_API_KEY"] = str(PINECONE_API_KEY)
     import pinecone
     pc = pinecone.Pinecone()
     
@@ -118,7 +118,7 @@ if __name__ == "__main__":
                     file_name = os.path.join('./', uploaded_file.name)
                     with open(file_name, 'wb') as f:
                         f.write(bytes_data)
-                     #delete_pinecone_index(index_name='project')
+                    delete_pinecone_index(index_name='project')
                     data = load_documents(file_name)
                     chunked_data = chunk_data(data, chunk_size=1000)
                     vector_store = create_embeddings_vectorstore(chunked_data)
@@ -129,14 +129,14 @@ if __name__ == "__main__":
     elif option == "Web Data":
         address = st.text_input('Please input the web address:')
         add_data = st.button('Scrape Data')
-        if address:
-            if add_data:
-                with st.spinner('Reading and processing web address ...'):
-                    data = load_external(address)
-                    chunked_data = chunk_data(data, chunk_size=1000)
-                    vector_store = create_embeddings_vectorstore(chunked_data)
-                    st.session_state.vs = vector_store
-                    st.success('Text from the site has been scraped and can now be queried.')
+        if address and add_data:
+            with st.spinner('Reading and processing web address ...'):
+                delete_pinecone_index(index_name='project')
+                data = load_external(address)
+                chunked_data = chunk_data(data, chunk_size=1000)
+                vector_store = create_embeddings_vectorstore(chunked_data)
+                st.session_state.vs = vector_store
+                st.success('Text from the site has been scraped and can now be queried.')
 
     st.divider()
 
