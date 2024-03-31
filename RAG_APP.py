@@ -116,7 +116,7 @@ if __name__ == "__main__":
                     file_name = os.path.join('./', uploaded_file.name)
                     with open(file_name, 'wb') as f:
                         f.write(bytes_data)
-                    delete_pinecone_index(index_name='project')
+                     #delete_pinecone_index(index_name='project')
                     data = load_documents(file_name)
                     chunked_data = chunk_data(data, chunk_size=1000)
                     vector_store = create_embeddings_vectorstore(chunked_data)
