@@ -12,9 +12,9 @@ from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain_openai import OpenAIEmbeddings
 
 # Set environment variables
-os.environ['OPENAI_API_KEY'] = "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"
-os.environ["api_key"] = "3d06ba60-cfdc-45e6-9ce3-fc6445708f2d"
-os.environ["PINECONE_API_KEY"] = "3d06ba60-cfdc-45e6-9ce3-fc6445708f2d"
+OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
+api_key = st.secrets['api_key']
+PINECONE_API_KEY = st.secrets['PINECONE_API_KEY']
 
 llm = ChatOpenAI()
 
@@ -65,7 +65,7 @@ def create_embeddings_vectorstore(chunked_data):
 
 # Function to delete Pinecone index
 def delete_pinecone_index(index_name='project'):
-    os.environ["PINECONE_API_KEY"] = "3d06ba60-cfdc-45e6-9ce3-fc6445708f2d"
+    os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
     import pinecone
     pc = pinecone.Pinecone()
     
@@ -144,4 +144,4 @@ if __name__ == "__main__":
         if 'vs' in st.session_state:
             vector_store = st.session_state.vs
             answer = questions_answer(question, vector_store)
-            st.text_area('LLM Answer:', value=answer)
+            st.text_area('Context Answer:', value=answer)
