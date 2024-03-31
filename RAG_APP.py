@@ -57,7 +57,7 @@ def create_embeddings_vectorstore(chunked_data):
     from langchain_community.vectorstores import Pinecone
     from langchain_openai import OpenAIEmbeddings
     from pinecone import PodSpec
-    os.environ["PINECONE_API_KEY"] = os.getenv("PINECONE_API")
+    os.environ["PINECONE_API_KEY"] = "90ca62ef-dc08-462b-b096-991685ac438b"
     
     index_name = "project"
     pc = pinecone.Pinecone()
@@ -80,7 +80,7 @@ def create_embeddings_vectorstore(chunked_data):
 
 # Function to delete Pinecone index
 def delete_pinecone_index(index_name='project'):
-    os.environ["PINECONE_API_KEY"] = os.getenv("PINECONE_API")
+    os.environ["PINECONE_API_KEY"] = "90ca62ef-dc08-462b-b096-991685ac438b"
     import pinecone
     pc = pinecone.Pinecone()
     
