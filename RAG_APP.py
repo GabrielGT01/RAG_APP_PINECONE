@@ -93,7 +93,7 @@ def delete_pinecone_index(index_name='project'):
     os.environ["PINECONE_API_KEY"] = PINECONE_API
     import pinecone
     pc = pinecone.Pinecone()
-        pc.init(
+    pc.init(
         api_key=PINECONE_API,
         environment="gcp-starter"
     )
