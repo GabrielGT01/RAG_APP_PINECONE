@@ -94,7 +94,7 @@ def create_embeddings_vectorstore(chunked_data):
 def delete_pinecone_index(index_name='project'):
     
     pinecone.init(
-        api_key=PINECONE_API_KEY,
+        api_key=os.environ['PINECONE_API_KEY'] ,
         environment='gcp-starter'
     )
 
