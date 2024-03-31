@@ -23,23 +23,28 @@ def load_documents(file):
     name, extension = os.path.splitext(file)
     if extension == ".pdf":
         loader = PyPDFLoader(file)
+        data = loader.load()
     elif extension == ".docx":
         loader = Docx2txtLoader(file)
+        data = loader.load()
     elif extension == ".txt":
         loader = TextLoader(file, encoding='iso-8859-1')
+        data = loader.load()
     else:
         st.error("Document format is not supported!")
         return None
-    return loader.load()
+    return data
 
 # Function to load web sources
 def load_external(source):
     if source:
         loader = WebBaseLoader(source)
-        return loader.load()
+        data = loader.load()
+        return data 
     else:
         st.error("Web address does not support web scraping!")
         return None
+    return data
 
 # Function to chunk data
 def chunk_data(data, chunk_size=1000):
