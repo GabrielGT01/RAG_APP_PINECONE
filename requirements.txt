@@ -4,7 +4,6 @@ langchain-text-splitters
 langchain_openai
 pinecone-client==3.1.0
 docx2txt
-langchain.document_loaders
 pypdf
 text-unidecode
 langchain-community== 0.0.24
