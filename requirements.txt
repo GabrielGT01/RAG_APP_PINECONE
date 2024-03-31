@@ -7,3 +7,4 @@ docx2txt
 pypdf
 text-unidecode
 langchain-community== 0.0.24
+pandas
