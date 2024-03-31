@@ -90,13 +90,12 @@ def create_embeddings_vectorstore(chunked_data):
 
 # Function to delete Pinecone index
 def delete_pinecone_index(index_name='project'):
-    os.environ["PINECONE_API_KEY"] = PINECONE_API
-    import pinecone
-    
+    from langchain.vectorstores import Pinecone
     pinecone.init(
-        api_key=PINECONE_API,
-        environment="gcp-starter"
+        api_key=PINECONE_API_KEY,
+        environment='gcp-starter'
     )
+
     pc = pinecone.Pinecone()
     if index_name == 'all':
         indexes = pc.list_indexes().names()
