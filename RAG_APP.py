@@ -62,24 +62,18 @@ def create_embeddings_vectorstore(chunked_data):
     from langchain_community.vectorstores import Pinecone
     from langchain_openai import OpenAIEmbeddings
     from pinecone import PodSpec
-    os.environ["PINECONE_API_KEY"] = PINECONE_API
-
-
-    
-    index_name = "project"
-    pc = pinecone.Pinecone()
-    embeddings = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536)
-
-    pc.init(
-        api_key=PINECONE_API,
-        environment="gcp-starter"
+    pinecone.init(
+        api_key=os.environ['PINECONE_API_KEY'] ,
+        environment='gcp-starter'
     )
+    index_name = "project"
+    embeddings = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536)
    
-    if index_name in pc.list_indexes().names():
+    if index_name in Pinecone.list_indexes().names():
         vector_store = Pinecone.from_existing_index(index_name, embeddings)
     else:
         # creating a new index
-        pc.create_index(
+        Pinecone.create_index(
             name=index_name,
             dimension=1536,
             metric='cosine',
@@ -150,7 +144,7 @@ if __name__ == "__main__":
                     file_name = os.path.join('./', uploaded_file.name)
                     with open(file_name, 'wb') as f:
                         f.write(bytes_data)
-                    delete_pinecone_index(index_name='project')
+                     #delete_pinecone_index(index_name='project')
                     data = load_documents(file_name)
                     chunked_data = chunk_data(data, chunk_size=1000)
                     vector_store = create_embeddings_vectorstore(chunked_data)
