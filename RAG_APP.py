@@ -12,11 +12,14 @@ from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain_openai import OpenAIEmbeddings
 
 # Set environment variables
-os.environ['OPENAI_API_KEY'] =st.secrets['OPENAI_API_KEY']
-os.environ["api_key"] = st.secrets['api_key'] 
-os.environ["PINECONE_API"] = st.secrets['PINECONE_API_KEY'] 
+OPENAI_API =st.secrets['OPENAI_API_KEY']
+api = st.secrets['api_key'] 
+PINECONE_API = st.secrets['PINECONE_API_KEY'] 
 
 #PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+os.environ['PINECONE_API_KEY'] = PINECONE_API
+os.environ['OPENAI_API_KEY'] = OPENAI_API
+os.environ["api_key"] = api
 
 
 llm = ChatOpenAI()
@@ -57,7 +60,7 @@ def create_embeddings_vectorstore(chunked_data):
     from langchain_community.vectorstores import Pinecone
     from langchain_openai import OpenAIEmbeddings
     from pinecone import PodSpec
-    os.environ["PINECONE_API_KEY"] = "90ca62ef-dc08-462b-b096-991685ac438b"
+    os.environ["PINECONE_API_KEY"] = PINECONE_API
     
     index_name = "project"
     pc = pinecone.Pinecone()
@@ -80,7 +83,7 @@ def create_embeddings_vectorstore(chunked_data):
 
 # Function to delete Pinecone index
 def delete_pinecone_index(index_name='project'):
-    os.environ["PINECONE_API_KEY"] = "90ca62ef-dc08-462b-b096-991685ac438b"
+    os.environ["PINECONE_API_KEY"] = PINECONE_API
     import pinecone
     pc = pinecone.Pinecone()
     
