@@ -3,4 +3,5 @@ langchain
 langchain-text-splitters
 langchain_openai
 pinecone-client==3.1.0
+langchain-community
 docx2txt
