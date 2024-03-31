@@ -17,7 +17,7 @@ api_key = st.secrets['api_key']
 PINECONE_API_KEY = st.secrets['PINECONE_API_KEY']
 
 llm = ChatOpenAI()
-st.write(PINECONE_API_KEY)
+str(st.write(PINECONE_API_KEY))
 # Function to load documents
 def load_documents(file):
     name, extension = os.path.splitext(file)
@@ -53,6 +53,8 @@ def create_embeddings_vectorstore(chunked_data):
     from langchain_community.vectorstores import Pinecone
     from langchain_openai import OpenAIEmbeddings
     from pinecone import PodSpec
+
+    os.environ["PINECONE_API_KEY"] = str(PINECONE_API_KEY)
     index_name = "project"
     embeddings = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536)
     pc = pinecone.Pinecone()
