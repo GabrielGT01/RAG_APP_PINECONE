@@ -54,14 +54,13 @@ def chunk_data(data, chunk_size=1000):
     return text_splitter.split_documents(data)
 
 # Function to create embeddings vector store
+
 def create_embeddings_vectorstore(chunked_data):
     # importing the necessary libraries and initializing the Pinecone client
     import pinecone
     from langchain_community.vectorstores import Pinecone
     from langchain_openai import OpenAIEmbeddings
     from pinecone import PodSpec
-
-    os.environ["PINECONE_API_KEY"] = "3d06ba60-cfdc-45e6-9ce3-fc6445708f2d"
     index_name = "project"
     embeddings = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536)
     pc = pinecone.Pinecone()
@@ -71,6 +70,7 @@ def create_embeddings_vectorstore(chunked_data):
         pc.create_index(name=index_name, dimension=1536, metric='cosine',spec=PodSpec(environment='gcp-starter'))
         vector_store = Pinecone.from_documents(chunked_data, embeddings, index_name=index_name)
     return vector_store
+
 
 # Function to delete Pinecone index
 def delete_pinecone_index(index_name='project'):
