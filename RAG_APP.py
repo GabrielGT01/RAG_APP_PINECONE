@@ -1,6 +1,8 @@
 import os
 import streamlit as st
-from pinecone import Pinecone
+#from pinecone import Pinecone
+import pinecone 
+from langchain.vectorstores import Pinecone
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -56,7 +58,7 @@ def chunk_data(data, chunk_size=1000):
 # Function to create embeddings vector store
 def create_embeddings_vectorstore(chunked_data):
     # importing the necessary libraries and initializing the Pinecone client
-    import pinecone
+    
     from langchain_community.vectorstores import Pinecone
     from langchain_openai import OpenAIEmbeddings
     from pinecone import PodSpec
@@ -90,21 +92,20 @@ def create_embeddings_vectorstore(chunked_data):
 
 # Function to delete Pinecone index
 def delete_pinecone_index(index_name='project'):
-    from langchain.vectorstores import Pinecone
+    
     pinecone.init(
         api_key=PINECONE_API_KEY,
         environment='gcp-starter'
     )
 
-    pc = pinecone.Pinecone()
     if index_name == 'all':
-        indexes = pc.list_indexes().names()
+        indexes = Pinecone.list_indexes().names()
         
         for index in indexes:
-            pc.delete_index(index)
+            Pinecone.delete_index(index)
         
     else:
-        pc.delete_index(index_name)
+        Pinecone.delete_index(index_name)
 
 # Function to ask and get answers
 def questions_answer(question, vector_store):
