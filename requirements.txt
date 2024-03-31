@@ -1,10 +1,11 @@
-streamlit
-langchain
+streamlit==1.32.0
+langchain==0.1.9
 langchain-text-splitters
-langchain_openai
+langchain-openai==0.0.8
 pinecone-client==3.1.0
 docx2txt
 pypdf
 text-unidecode
-langchain-community== 0.0.24
-pandas
+langchain-community==0.0.24
+langchainhub==0.1.15
+openai==1.12.0
