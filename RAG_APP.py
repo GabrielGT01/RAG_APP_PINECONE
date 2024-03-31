@@ -16,7 +16,9 @@ OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 api_key = st.secrets['api_key']
 PINECONE_API_KEY = st.secrets['PINECONE_API_KEY']
 
-llm = ChatOpenAI()
+
+llm = ChatOpenAI(openai_api_key = OPENAI_API_KEY)
+
 
 # Function to load documents
 def load_documents(file):
