@@ -63,8 +63,7 @@ def create_embeddings_vectorstore(chunked_data):
     from langchain_openai import OpenAIEmbeddings
     from pinecone import Pinecone
     from pinecone import PodSpec
-    pc = Pinecone(
-        api_key=os.environ.get("PINECONE_API_KEY")
+    pc = Pinecone(api_key=os.environ.get("PINECONE_API_KEY"))
     index_name = "project"
     embeddings = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536)
    
